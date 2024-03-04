@@ -19,7 +19,7 @@ const list = [
 }
 ];
 
-function App() {
+const App = () => {
   const welcome = {
     title: "React",
     greeting: "Hey"
@@ -37,7 +37,7 @@ function App() {
   );
 }
 
-  function Search () {
+  const  Search = () => {
     return (
       <div>
         <label htmlFor='search'>Search: </label>
@@ -50,7 +50,7 @@ function App() {
   return (
     <div>
       <ul>
-        {list.map(function (item) {
+        {list.map( (item) => {
           return (
             <li key={item.objectID}>
               <span>
