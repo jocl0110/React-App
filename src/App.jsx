@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 
- lesson-1-3
 function App() {
 
 
@@ -48,7 +47,6 @@ function App() {
   );
 }
 
- lesson-1-3
   function Search (props) {
     const {search, onSearch} = props;
 
@@ -73,7 +71,6 @@ function App() {
   return (
     <div>
       <ul>
-lesson-1-3
         {props.list.map(function (item) {
 
           return (
