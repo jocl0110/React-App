@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 
-
+ lesson-1-3
 function App() {
 
 
@@ -28,6 +28,7 @@ function App() {
   const handleSearch = (event) => {
     console.log(event.target.value)
     setSearchTerm(event.target.value);
+
   }
   const searchedStories = stories.filter((story) => 
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -47,13 +48,13 @@ function App() {
   );
 }
 
+ lesson-1-3
   function Search (props) {
     const {search, onSearch} = props;
 
     const handleChange = (event) => {
       props.onSearch(event)
     }
-
     return (
       <div>
         <label htmlFor='search'>Search: </label>
@@ -72,7 +73,9 @@ function App() {
   return (
     <div>
       <ul>
+lesson-1-3
         {props.list.map(function (item) {
+
           return (
               <Item key={item.objectID} item={item} />
           )
