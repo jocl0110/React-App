@@ -1,6 +1,17 @@
 import * as React from 'react';
 
 
+const useStorageState = (key, initialState) =>{
+  const [value, setValue] = React.useState(
+    localStorage.getItem(key || initialState)
+  );
+  
+  React.useEffect(() => {
+    localStorage.setItem(key, value)
+  }, [value, key])
+  return [value, setValue]
+}
+
 function App() {
 
 
@@ -22,13 +33,19 @@ function App() {
   }
   ];
 
-  const [searchTerm, setSearchTerm] = React.useState('Redux');
+
+  const [searchTerm, setSearchTerm] = useStorageState(
+    'search',
+    'React'
+  );
+
 
   const handleSearch = (event) => {
     console.log(event.target.value)
     setSearchTerm(event.target.value);
-
   }
+
+
   const searchedStories = stories.filter((story) => 
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -47,11 +64,10 @@ function App() {
   );
 }
 
-  function Search (props) {
-    const {search, onSearch} = props;
+  function Search ({search, onSearch, searchTerm}) {
 
     const handleChange = (event) => {
-      props.onSearch(event)
+        onSearch(event)
     }
     return (
       <div>
@@ -59,19 +75,19 @@ function App() {
         <input
          id='search'
          type='text'
-        onChange={onSearch}
-        value={props.search} 
+        onChange={handleChange}
+        value={search} 
         />
-        <p>Searching for <strong>{props.searchTerm}</strong></p>
+        <p>Searching for <strong>{searchTerm}</strong></p>
       </div>
     );
   }
 
-  function List(props) {
+  function List({list}) {
   return (
     <div>
       <ul>
-        {props.list.map(function (item) {
+        {list.map((item) => {
 
           return (
               <Item key={item.objectID} item={item} />
@@ -83,14 +99,14 @@ function App() {
     }
 
 
-    const Item = (props) => (
+    const Item = ({item}) => (
       <li>
         <span>
-          <a href={props.item.url}>{props.item.title}</a>
+          <a href={item.url}>{item.title}</a>
           </span>
-          <span> {props.item.author}</span>
-          <span> Comments: {props.item.num_comments}</span>
-          <span> Points: {props.item.points}</span>
+          <span> {item.author}</span>
+          <span> Comments: {item.num_comments}</span>
+          <span> Points: {item.points}</span>
       </li>
     );
 
